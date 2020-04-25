@@ -1,0 +1,43 @@
+@charset "utf-8";
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+
+/*<a href="http://www.freepik.com">Designed by brgfx / Freepik</a>* réf de l'image de fond/
+
+body{
+    background: url(phare.jpg) 0 0 no-repeat lightskyblue;
+    background-size: 100%;
+}
+
+aside{
+    position: fixed;
+    top: 0;
+    left: 85vw;
+    border: 1px solid #2DC5F4;
+    padding: 0.2em;
+    color: lightskyblue;
+}
+
+#cadre {
+    /*margin-top: 10px;*/
+    /*border: 1px solid black;*/
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-end;
+}
+.barre {
+    padding: 1px;
+    background-color: #2DC5F4;
+    border: 2px dotted #2DC5F4;
+    border-top: 1px dashed white;
+    height: 5%;
+    width: 1%;
+    transition: all 1s ease-out;
+}
