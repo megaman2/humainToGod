@@ -1,5 +1,6 @@
 const max = 200;
-let numMonte, numDescend;
+let numMonte = numDescend = null;
+console.log(numMonte);console.log(numDescend);
 let vague = [];
 for (let i = 0; i < max; i++) {
     vague[i] = document.createElement('div');
@@ -20,7 +21,7 @@ function monte(index, sommet) {
         if(index=numMonte){vague[index].style.borderTopLeftRadius=vague[index].style.borderTopRightRadius= '90% 10%'}
     }
         
-}1
+}
 function descend(index) {
     if((index>=0) && (index<max)){
     vague[index].style.height= '5%';  
@@ -105,8 +106,9 @@ document.onmouseout = function(e) {
         if (vague[i] == e.target){numDescend=i}
         i++;
     }
-    for (i = -24; i < 25; i++) {
-        descend(numDescend+i);
+    if (numDescend != null){
+    for (i = -24; i < 25; i++) {descend(numDescend+i)}	
     }
+    
     numDescend= null;
 }
