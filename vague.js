@@ -43,6 +43,7 @@ document.onmouseover = function(e) {
         if (vague[i] == e.target){numMonte=i}
         i++;
     }
+	// les lignes ci-dessous peuvent etre ameliorees
     console.log(numMonte);
     console.log(e.target);
     monte(numMonte, 90);
