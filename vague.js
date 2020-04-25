@@ -105,56 +105,8 @@ document.onmouseout = function(e) {
         if (vague[i] == e.target){numDescend=i}
         i++;
     }
-    console.log(numDescend);
-    console.log(e.target);
-    descend(numDescend);
-    descend(numDescend-1);
-    descend(numDescend-2);
-    descend(numDescend-3);
-    descend(numDescend-4);
-    descend(numDescend-5);
-    descend(numDescend-6);
-    descend(numDescend-7);
-    descend(numDescend-8);
-    descend(numDescend-9);
-    descend(numDescend-10);
-    descend(numDescend-11);
-    descend(numDescend-12);
-    descend(numDescend-13);
-    descend(numDescend-14);
-    descend(numDescend-15);
-    descend(numDescend-16);
-    descend(numDescend-17);
-    descend(numDescend-18);
-    descend(numDescend-19);
-    descend(numDescend-20);
-    descend(numDescend-21);
-    descend(numDescend-22);
-    descend(numDescend-23);
-    descend(numDescend-24);
-    descend(numDescend+1);
-    descend(numDescend+2);
-    descend(numDescend+3);
-    descend(numDescend+4);
-    descend(numDescend+5);
-    descend(numDescend+6);
-    descend(numDescend+7);
-    descend(numDescend+8);
-    descend(numDescend+9);
-    descend(numDescend+10);
-    descend(numDescend+11);
-    descend(numDescend+12);
-    descend(numDescend+13);
-    descend(numDescend+14);
-    descend(numDescend+15);
-    descend(numDescend+16);
-    descend(numDescend+17);
-    descend(numDescend+18);
-    descend(numDescend+19);
-    descend(numDescend+20);
-    descend(numDescend+21);
-    descend(numDescend+22);
-    descend(numDescend+23);
-    descend(numDescend+24);
+    for (i = -24; i < 25; i++) {
+        descend(numDescend+i);
+    }
     numDescend= null;
 }
