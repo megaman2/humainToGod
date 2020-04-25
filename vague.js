@@ -44,6 +44,7 @@ document.onmouseover = function(e) {
         i++;
     }
 	// les lignes ci-dessous peuvent etre ameliorees
+    //certes
     console.log(numMonte);
     console.log(e.target);
     monte(numMonte, 90);
