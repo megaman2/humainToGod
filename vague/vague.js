@@ -1,18 +1,27 @@
-const max = 200; //nombre de rectangles bleus
+const max = 100; //nombre de rectangles bleus
 let numMonte = numDescend = null;//variables globales qui vont contenir la position du rectangle (dé)sélectionné
 let vague = [];//tableau pour manipuler les rectangles qui vont monter et descendre plus facilement
+//calcul des hauteurs des rectangles bleus
+let h, x;
+let hauteurs = [];//tableau pour contenir les hauteurs des rectangles dans la vague
+const sigma=0.45;
+for (let i = 0; i < 26; i++) {
+    x = i / 24;
+    h = (1 / (sigma * Math.sqrt(2* Math.PI))) * Math.exp(-1 * (x ** 2) / (2 * (sigma ** 2)));
+    hauteurs[i]=h*100;
+}
 //création des rectangles bleus qui sont des div:
 for (let i = 0; i < max; i++) {
     vague[i] = document.createElement('div');
     vague[i].style.height = '5%';
-    vague[i].style.width = (max/100) + '%';
+    vague[i].style.width = (100/max) + '%';
     vague[i].style.borderRadius=0;
     console.log(i);
     console.log(document.getElementById('cadre'));
     document.getElementById('cadre').appendChild(vague[i]);
     document.getElementById('cadre').lastChild.setAttribute('class', 'barre');
 }
-//monte fixe la hauteur du rectangle n° index à sommet, puis arrondit ses angles:
+//fixe la hauteur du rectangle n° index à sommet, puis arrondit ses angles:
 function monte(index, sommet) {
     if((index>=0) && (index<max)){
         vague[index].style.height= sommet + '%';
@@ -24,42 +33,39 @@ function monte(index, sommet) {
         if(index=numMonte){vague[index].style.borderTopLeftRadius=vague[index].style.borderTopRightRadius= rx + ' 1%'}
     } 
 }
-//descend fixe la hauteur du rectangle n°index à la valeur basale de 5% et annule les angles arrondis:
+//fixe la hauteur du rectangle n°index à la valeur basale de 5% et annule les angles arrondis:
 function descend(index) {
     if((index>=0) && (index<max)){
     vague[index].style.height= '5%';  
     vague[index].style.borderRadius=0;
     }  
 }
-//détection du rectangle sur lequel la souris passe: met sa position dans numMonte puis lance la procédure monte 53 fois, selon une courbe gaussienne centrée
+//détection du rectangle sur lequel la souris passe: met sa position dans numMonte puis lance la procédure monte() 51 fois, selon une courbe gaussienne centrée
 document.onmouseover = function(e) {
-    let i = 0;
-    while (i < max){
-        if (vague[i] == e.target){numMonte=i}
-        i++;
-    }	
-    console.log(numMonte);
-    console.log(e.target);
+    vague.every(function (item, indice){
+        if (item == e.target){
+            numMonte=indice;
+            return false;
+        } else {return true}
+    });
     if (numMonte != null){
-        let h, sigma, x;
-        sigma=0.45;
-    for (i = -26; i < 27; i++) {
-        x = i / 25;
-        h = (1 / (sigma * Math.sqrt(2* Math.PI))) * Math.exp(-1 * (x ** 2) / (2 * (sigma ** 2)));
-        delta = Math.ceil(5 - i / 7);
-        monte(numMonte+i, h * 100);}
+        hauteurs.forEach(function(item, i){
+            monte(numMonte-i, item);
+            if (i!=0){monte(numMonte+i, item)};
+        });
     }    
     numMonte= null;
 }
-//détection du rectangle lorsque la souris le quitte: met sa position dans numDescend puis lance la procédure descend 53 fois
+//détection du rectangle lorsque la souris le quitte: met sa position dans numDescend puis lance la procédure descend() 51 fois
 document.onmouseout = function(e) {
-    let i = 0;
-    while (i < max){
-        if (vague[i] == e.target){numDescend=i}
-        i++;
-    }
+    vague.every(function (item, indice){
+        if (item == e.target){
+            numDescend=indice;
+            return false;
+        } else {return true}
+    });
     if (numDescend != null){
-    for (i = -26; i < 27; i++) {descend(numDescend+i)}	
+    for (let i = -25; i < 26; i++) {descend(numDescend+i)}	
     }
     numDescend= null;
 }
